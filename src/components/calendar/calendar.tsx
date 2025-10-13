@@ -10,6 +10,9 @@ import { ButtonGroup } from "@/components/ui/button-group"
 // Lucide Icons
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
+// Import Components
+import MonthView from "./views/MonthView"
+
 export default function Calendar() {
 	const [currentDate, setCurrentDate] = useState(new Date())
 
@@ -72,6 +75,8 @@ export default function Calendar() {
 					</div>
 				</div>
 			</header>
+
+            <MonthView />
 		</div>
 	)
 }
