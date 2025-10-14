@@ -76,7 +76,9 @@ export default function Calendar() {
 				</div>
 			</header>
 
-            <MonthView />
+            <MonthView
+				currentDate={currentDate}
+			/>
 		</div>
 	)
 }
