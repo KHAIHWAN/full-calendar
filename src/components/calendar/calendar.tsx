@@ -12,9 +12,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // Import Components
 import MonthView from "./views/MonthView"
+import WeekView from "./views/WeekView"
+import DayView from "./views/DayView"
+import AgendaView from "./views/AgendaView"
 
 export default function Calendar() {
 	const [currentDate, setCurrentDate] = useState(new Date())
+	const [view, setView] = useState("month")
 
 	const getMonth = () => {
 		return currentDate.toLocaleDateString("en-US", {
@@ -94,16 +98,28 @@ export default function Calendar() {
 					{/* Header Sub Right */}
 					<div className='flex items-center space-x-2'>
 						<ButtonGroup>
-							<Button variant='outline' className='border-gray-300'>
+							<Button
+								onClick={() => setView("month")}
+								variant={view === "month" ? "default" : "outline"}
+								className={view === "month" ? "border-gray-300" : "border-gray-200"}>
 								Month
 							</Button>
-							<Button variant='outline' className='border-gray-300'>
+							<Button
+								onClick={() => setView("week")}
+								variant={view === "week" ? "default" : "outline"}
+								className={view === "week" ? "border-gray-300" : "border-gray-200"}>
 								Week
 							</Button>
-							<Button variant='outline' className='border-gray-300'>
+							<Button
+								onClick={() => setView("day")}
+								variant={view === "day" ? "default" : "outline"}
+								className={view === "day" ? "border-gray-300" : "border-gray-200"}>
 								Day
 							</Button>
-							<Button variant='outline' className='border-gray-300'>
+							<Button
+								onClick={() => setView("agenda")}
+								variant={view === "agenda" ? "default" : "outline"}
+								className={view === "agenda" ? "border-gray-300" : "border-gray-200"}>
 								Agenda
 							</Button>
 						</ButtonGroup>
@@ -111,7 +127,10 @@ export default function Calendar() {
 				</div>
 			</header>
 
-			<MonthView currentDate={currentDate} />
+			{view === "month" && <MonthView currentDate={currentDate} />}
+			{view === "week" && <WeekView />}
+			{view === "day" && <DayView />}
+			{view === "agenda" && <AgendaView />}	
 		</div>
 	)
 }
