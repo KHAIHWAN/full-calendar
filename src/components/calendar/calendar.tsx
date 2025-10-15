@@ -24,6 +24,22 @@ export default function Calendar() {
 		})
 	}
 
+	const handlePreviousMonth = () => {
+		const newDate = new Date(currentDate)
+		newDate.setMonth(newDate.getMonth() - 1)
+		setCurrentDate(newDate)
+	}
+
+	const handleNextMonth = () => {
+		const newDate = new Date(currentDate)
+		newDate.setMonth(newDate.getMonth() + 1)
+		setCurrentDate(newDate)
+	}
+
+	const handleToday = () => {
+		setCurrentDate(new Date())
+	}
+
 	return (
 		<div className='h-screen flex flex-col bg-white'>
 			{/* Header Calendar */}
@@ -48,14 +64,25 @@ export default function Calendar() {
 				<div className='flex items-center justify-between mt-2'>
 					{/* Header Sub Left */}
 					<div className='flex items-center space-x-2'>
-						<Button variant='outline' className='border-gray-300'>
+						<Button
+							variant='outline'
+							className='border-gray-300'
+							onClick={handleToday}>
 							Today
 						</Button>
 						<div className='flex items-center space-x-2'>
-							<Button variant='outline' size='icon' className='border-gray-300'>
+							<Button
+								variant='outline'
+								size='icon'
+								className='border-gray-300'
+								onClick={handlePreviousMonth}>
 								<ChevronLeft />
 							</Button>
-							<Button variant='outline' size='icon' className='border-gray-300'>
+							<Button
+								variant='outline'
+								size='icon'
+								className='border-gray-300'
+								onClick={handleNextMonth}>
 								<ChevronRight />
 							</Button>
 						</div>
@@ -67,18 +94,24 @@ export default function Calendar() {
 					{/* Header Sub Right */}
 					<div className='flex items-center space-x-2'>
 						<ButtonGroup>
-							<Button variant='outline' className='border-gray-300'>Month</Button>
-							<Button variant='outline' className='border-gray-300'>Week</Button>
-							<Button variant='outline' className='border-gray-300'>Day</Button>
-                            <Button variant='outline' className='border-gray-300'>Agenda</Button>
+							<Button variant='outline' className='border-gray-300'>
+								Month
+							</Button>
+							<Button variant='outline' className='border-gray-300'>
+								Week
+							</Button>
+							<Button variant='outline' className='border-gray-300'>
+								Day
+							</Button>
+							<Button variant='outline' className='border-gray-300'>
+								Agenda
+							</Button>
 						</ButtonGroup>
 					</div>
 				</div>
 			</header>
 
-            <MonthView
-				currentDate={currentDate}
-			/>
+			<MonthView currentDate={currentDate} />
 		</div>
 	)
 }
