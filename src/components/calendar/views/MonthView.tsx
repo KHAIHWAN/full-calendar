@@ -8,6 +8,10 @@ export default function MonthView({ currentDate }: { currentDate: Date }) {
 
 	const days = getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth())
 
+	const isCurrentMonth = (date: Date): boolean => {
+		return date.getMonth() === currentDate.getMonth()
+	}
+
 	return (
 		<div className='flex flex-col h-full'>
 			{/* Week Days Header */}
@@ -26,7 +30,10 @@ export default function MonthView({ currentDate }: { currentDate: Date }) {
 				{days.map((day: Date, index: number) => (
 					<div
 						key={index}
-						className='min-h-[120px] p-2 border-b border-r border-gray-200 last:border-r-0'>
+						className={`
+							min-h-[120px] p-2 border-b border-r border-gray-200 last:border-r-0
+							${isCurrentMonth(day) ? "bg-white" : "bg-gray-50"}
+						`}>
 						<div
 							className={
 								isToday(day)
