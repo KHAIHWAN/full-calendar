@@ -37,11 +37,40 @@ export default function Calendar() {
     }
 
     const showCurrentDate = () => {
-        return currentDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        })
+        switch (viewCalendar) {
+            case 'month':
+                return currentDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })
+            case 'week':
+                const weekStart = new Date(currentDate)
+                const day = weekStart.getDay()
+                const startDayOfWeek = weekStart.getDate() - day
+
+                weekStart.setDate(startDayOfWeek)
+
+                const weekEnd = new Date(weekStart)
+                weekEnd.setDate(weekEnd.getDate() + 6)
+                
+                return `${weekStart.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                })} - ${weekEnd.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                })}`
+            case 'day':
+                return currentDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                }) 
+            case 'agenda':
+                return 'Agenda'
+        }
     }
 
 	return (
