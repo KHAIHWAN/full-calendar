@@ -10,8 +10,15 @@ import { ButtonGroup } from "@/components/ui/button-group"
 // Lucide Icon
 import { CalendarPlus, ChevronLeft, ChevronRight } from "lucide-react"
 
+// Import Components Calendar 
+import MonthView from "./views/MonthView"
+import WeekView from "./views/WeekView"
+import DayView from "./views/DayView"
+import AgendaView from "./views/AgendaView"
+
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date())
+    const [viewCalendar, setViewCalendar] = useState('month')
 
     const handleToday = () => {
         setCurrentDate(new Date())
@@ -37,10 +44,9 @@ export default function Calendar() {
         })
     }
 
-
 	return (
 		<div className='h-screen flex flex-col bg-white'>
-            
+
 			{/* Header */}
 			<div className='border-b border-gray-200 px-6 py-4'>
 				<div className='flex items-center justify-between'>
@@ -95,23 +101,56 @@ export default function Calendar() {
 					<div className='flex items-center space-x-2'>
 						<ButtonGroup>
 							<Button
-								variant='outline'
-								className='rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200'>
+								variant={viewCalendar === 'month' 
+                                    ? 'default' 
+                                    : 'outline'}
+								className={`
+                                    rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 
+                                    ${viewCalendar === 'month' 
+                                        ? 'bg-gray-200' 
+                                        : ''}`
+                                    }
+                                onClick={() => setViewCalendar('month')}
+                                >
 								Month
 							</Button>
 							<Button
-								variant='outline'
-								className='rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200'>
+								variant={viewCalendar === 'week' 
+                                    ? 'default' 
+                                    : 'outline'}
+								className={`
+                                    rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 
+                                    ${viewCalendar === 'week' 
+                                        ? 'bg-gray-200' 
+                                        : ''}`
+                                    }
+                                onClick={() => setViewCalendar('week')}>
 								Week
 							</Button>
 							<Button
-								variant='outline'
-								className='rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200'>
+								variant={viewCalendar === 'day' 
+                                    ? 'default' 
+                                    : 'outline'}
+								className={`
+                                    rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 
+                                    ${viewCalendar === 'day' 
+                                        ? 'bg-gray-200' 
+                                        : ''}`
+                                    }
+                                onClick={() => setViewCalendar('day')}>
 								Day
 							</Button>
 							<Button
-								variant='outline'
-								className='rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200'>
+								variant={viewCalendar === 'agenda' 
+                                    ? 'default' 
+                                    : 'outline'}
+								className={`
+                                    rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 
+                                    ${viewCalendar === 'agenda' 
+                                        ? 'bg-gray-200' 
+                                        : ''}`
+                                    }
+                                onClick={() => setViewCalendar('agenda')}>
 								Agenda
 							</Button>
 						</ButtonGroup>
@@ -121,7 +160,10 @@ export default function Calendar() {
 
             {/* Calendar */}
             <div className="flex-1 overflow-hidden">
-                Days Calendar
+                {viewCalendar === 'month' && <MonthView />}
+                {viewCalendar === 'week' && <WeekView />}
+                {viewCalendar === 'day' && <DayView />}
+                {viewCalendar === 'agenda' && <AgendaView />}
             </div>
 		</div>
 	)
