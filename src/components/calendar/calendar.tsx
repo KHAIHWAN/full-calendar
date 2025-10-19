@@ -189,7 +189,10 @@ export default function Calendar() {
 
             {/* Calendar */}
             <div className="flex-1 overflow-hidden">
-                {viewCalendar === 'month' && <MonthView />}
+                {viewCalendar === 'month' && 
+                    <MonthView 
+                        currentDate={currentDate}
+                         />}
                 {viewCalendar === 'week' && <WeekView />}
                 {viewCalendar === 'day' && <DayView />}
                 {viewCalendar === 'agenda' && <AgendaView />}
