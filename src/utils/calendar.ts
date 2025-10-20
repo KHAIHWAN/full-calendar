@@ -47,3 +47,20 @@ export const isToday = (date: Date): boolean => {
     const today = new Date()
     return isSameDay(date, today)
 }
+
+export const getWeekDays = (date: Date): Date[] => {
+    const weekDays: Date[] = []
+    const currentDate = new Date(date)
+
+    const sunday = new Date(
+        currentDate.setDate(currentDate.getDate() - currentDate.getDay())
+    )
+
+    for (let i = 0; i < 7; i++) {
+        const day = new Date(sunday)
+        day.setDate(sunday.getDate() + i)
+        weekDays.push(day)
+    }
+
+    return weekDays
+}
