@@ -18,7 +18,7 @@ import AgendaView from "./views/AgendaView"
 
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date())
-    const [viewCalendar, setViewCalendar] = useState('day')
+    const [viewCalendar, setViewCalendar] = useState('agenda')
 
     const handleToday = () => {
         setCurrentDate(new Date())
