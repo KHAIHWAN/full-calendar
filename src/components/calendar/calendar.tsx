@@ -18,7 +18,7 @@ import AgendaView from "./views/AgendaView"
 
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date())
-    const [viewCalendar, setViewCalendar] = useState('week')
+    const [viewCalendar, setViewCalendar] = useState('day')
 
     const handleToday = () => {
         setCurrentDate(new Date())
@@ -33,6 +33,9 @@ export default function Calendar() {
             case 'week':
                 newDate.setDate(newDate.getDate() - 7)
                 break
+            case 'day':
+                newDate.setDate(newDate.getDate() - 1)
+                break
         }
         setCurrentDate(newDate)
      }
@@ -45,6 +48,9 @@ export default function Calendar() {
                 break
             case 'week':
                 newDate.setDate(newDate.getDate() + 7)
+                break
+            case 'day':
+                newDate.setDate(newDate.getDate() + 1)
                 break
         }
         setCurrentDate(newDate)
@@ -211,7 +217,10 @@ export default function Calendar() {
                     <WeekView 
                         currentDate={currentDate}
                          />}
-                {viewCalendar === 'day' && <DayView />}
+                {viewCalendar === 'day' && 
+                    <DayView 
+                        currentDate={currentDate} 
+                        />}
                 {viewCalendar === 'agenda' && <AgendaView />}
             </div>
 		</div>
