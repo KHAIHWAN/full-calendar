@@ -64,3 +64,13 @@ export const getWeekDays = (date: Date): Date[] => {
 
     return weekDays
 }
+
+export const getHours = () => {
+    const hours: string[] = []
+
+    for (let hour = 0; hour < 24; hour++) {
+        hours.push(`${hour.toString().padStart(2, '0')}:00`)
+    }
+
+    return hours
+}

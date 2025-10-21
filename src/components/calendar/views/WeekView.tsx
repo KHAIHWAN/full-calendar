@@ -1,6 +1,6 @@
 'use client'
 
-import { getWeekDays, isToday } from "@/utils/calendar"
+import { getHours, getWeekDays, isToday } from "@/utils/calendar"
 
 export default function WeekView({ currentDate }: { currentDate: Date }) {
     const weekDays = getWeekDays(currentDate)
@@ -30,6 +30,22 @@ export default function WeekView({ currentDate }: { currentDate: Date }) {
                             </div>
                     </div>
                 ))}
+            </div>
+
+            {/* Time Slots */}
+            <div className="flex-1">
+                {getHours().map((hour: string, hourIndex: number) => (
+                    <div key={hourIndex} className="grid grid-cols-[80px_repeat(7,1fr)] border-b border-gray-200">
+                        <div className="py-2 px-2 text-xs text-right text-gray-500 border-r border-gray-200">
+                            {hour}
+                        </div>
+                        {weekDays.map((day: Date, dayIndex: number) => (
+                            <div key={dayIndex} className="py-2 px-2 border-r border-gray-200">
+                                
+                            </div>
+                        ))}
+                    </div>
+                ))} 
             </div>
         </div>
     )
