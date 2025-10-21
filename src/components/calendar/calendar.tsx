@@ -24,15 +24,29 @@ export default function Calendar() {
         setCurrentDate(new Date())
     }
 
-    const handlePreviousMonth = () => {
+    const handlePrevious = () => {
         const newDate = new Date(currentDate)
-        newDate.setMonth(newDate.getMonth() - 1)
+        switch (viewCalendar) {
+            case 'month':
+                newDate.setMonth(newDate.getMonth() - 1)
+                break
+            case 'week':
+                newDate.setDate(newDate.getDate() - 7)
+                break
+        }
         setCurrentDate(newDate)
-    }
+     }
 
-    const handleNextMonth = () => {
+    const handleNext = () => {
         const newDate = new Date(currentDate)
-        newDate.setMonth(newDate.getMonth() + 1)
+        switch (viewCalendar) {
+            case 'month':
+                newDate.setMonth(newDate.getMonth() + 1)
+                break
+            case 'week':
+                newDate.setDate(newDate.getDate() + 7)
+                break
+        }
         setCurrentDate(newDate)
     }
 
@@ -111,14 +125,14 @@ export default function Calendar() {
 							variant='outline'
 							size='icon'
 							className='rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200'
-                            onClick={handlePreviousMonth}>
+                            onClick={handlePrevious}>
 							<ChevronLeft className='h-4 w-4' />
 						</Button>
 						<Button
 							variant='outline'
 							size='icon'
 							className='rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200'
-                            onClick={handleNextMonth}>
+                            onClick={handleNext}>
 							<ChevronRight className='h-4 w-4' />
 						</Button>
                         <h2 className="text-xl font-semibold text-gray-900 ml-4">

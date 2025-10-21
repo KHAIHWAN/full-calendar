@@ -40,7 +40,7 @@ export default function WeekView({ currentDate }: { currentDate: Date }) {
                             {hour}
                         </div>
                         {weekDays.map((day: Date, dayIndex: number) => (
-                            <div key={dayIndex} className="py-2 px-2 border-r border-gray-200">
+                            <div key={dayIndex} className="min-h-[60px] p-1 border-r border-gray-200 last:border-r-0 relative transition-colors select-none">
                                 
                             </div>
                         ))}
