@@ -16,9 +16,13 @@ import WeekView from "./views/WeekView"
 import DayView from "./views/DayView"
 import AgendaView from "./views/AgendaView"
 
+import DialogBooking from "./dialogBooking"
+
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date())
     const [viewCalendar, setViewCalendar] = useState('agenda')
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const handleToday = () => {
         setCurrentDate(new Date())
@@ -93,6 +97,14 @@ export default function Calendar() {
         }
     }
 
+    const handleCreateBooking = () => {
+        setIsDialogOpen(true)
+    }
+
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false)
+    }
+
 	return (
 		<div className='h-screen flex flex-col bg-white'>
 
@@ -109,7 +121,10 @@ export default function Calendar() {
 
 					{/* Header Right Button Action Booking */}
 					<div className='flex items-center space-x-4'>
-						<Button className='rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-600'>
+						<Button 
+                            className='rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-600'
+                            onClick={handleCreateBooking}
+                        >
 							<CalendarPlus className='h-4 w-4' />
 							Add Booking
 						</Button>
@@ -223,6 +238,12 @@ export default function Calendar() {
                         />}
                 {viewCalendar === 'agenda' && <AgendaView />}
             </div>
+
+            {/* Dialog Booking */}
+            <DialogBooking 
+                isOpen={isDialogOpen}
+                onClose={handleCloseDialog}
+            />
 		</div>
 	)
 }
