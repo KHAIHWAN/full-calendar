@@ -1,6 +1,6 @@
 'use client'
 
-import { getHours, getWeekDays } from "@/utils/calendar"
+import { getHours, isPastTime } from "@/utils/calendar"
 
 export default function DayView({ currentDate }: { currentDate: Date }) {
     return (
@@ -28,9 +28,15 @@ export default function DayView({ currentDate }: { currentDate: Date }) {
                         <div className="w-20 py-2 px-2 text-xs text-gray-500 text-right border-r border-gray-200 flex-shrink-0">
                             {hour}
                         </div>
-                        <div className='flex-1 min-h-[80px] p-2 relative transition-colors select-none'>
-                            
-                        </div>
+                        {isPastTime(hour, currentDate) ? (
+                            <div className="flex-1 min-h-[80px] p-2 relative transition-colors select-none bg-gray-50 cursor-not-allowed">
+                            </div>
+
+                        ) : (
+                            <div className="flex-1 min-h-[80px] p-2 relative transition-colors select-none hover:bg-blue-50 cursor-pointer">
+
+                            </div>
+                        )}
                     </div>
                 ))}
                 
