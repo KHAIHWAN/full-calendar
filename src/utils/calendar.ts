@@ -77,5 +77,9 @@ export const getHours = () => {
 
 export const isPastDate = (date: Date): boolean => {
     const today = new Date()
-    return date < today
+    today.setHours(0, 0, 0, 0)
+    const checkDate = new Date(date)
+    checkDate.setHours(0, 0, 0, 0)
+
+    return checkDate < today
 }
