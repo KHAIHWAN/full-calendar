@@ -83,3 +83,14 @@ export const isPastDate = (date: Date): boolean => {
 
     return checkDate < today
 }
+
+export const isPastTime = (hour: string, date: Date): boolean => {
+    const now = new Date()
+
+    const slotHour = parseInt(hour.slice(0, 2), 10)
+
+    const slotDate = new Date(date)
+    slotDate.setHours(slotHour, 0, 0, 0)
+
+    return slotDate < now
+}

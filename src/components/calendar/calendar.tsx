@@ -20,7 +20,7 @@ import DialogBooking from "./dialogBooking"
 
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date())
-    const [viewCalendar, setViewCalendar] = useState('month')
+    const [viewCalendar, setViewCalendar] = useState('week')
 
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 

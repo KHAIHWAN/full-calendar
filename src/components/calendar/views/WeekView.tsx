@@ -1,6 +1,6 @@
 'use client'
 
-import { getHours, getWeekDays, isToday } from "@/utils/calendar"
+import { getHours, getWeekDays, isPastTime, isToday } from "@/utils/calendar"
 
 export default function WeekView({ currentDate }: { currentDate: Date }) {
     const weekDays = getWeekDays(currentDate)
@@ -40,8 +40,13 @@ export default function WeekView({ currentDate }: { currentDate: Date }) {
                             {hour}
                         </div>
                         {weekDays.map((day: Date, dayIndex: number) => (
-                            <div key={dayIndex} className="min-h-[60px] p-1 border-r border-gray-200 last:border-r-0 relative transition-colors select-none">
-                                
+                            <div key={dayIndex} 
+                                className={`min-h-[60px] p-1 border-r border-gray-200 last:border-r-0 relative transition-colors select-none
+                                ${isPastTime(hour, day)
+                                    ? 'bg-gray-50 cursor-not-allowed'
+                                    : 'hover:bg-blue-50 cursor-pointer'}`}
+                                >
+                            
                             </div>
                         ))}
                     </div>
