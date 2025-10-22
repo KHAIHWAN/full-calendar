@@ -1,7 +1,7 @@
 'use client'
 
 // utils
-import { getDays, weekDays, isToday } from "@/utils/calendar"
+import { getDays, weekDays, isToday, isPastDate } from "@/utils/calendar"
 
 export default function MonthView({ currentDate }: { currentDate: Date }) {
     const days = getDays(currentDate.getFullYear(), currentDate.getMonth())
@@ -28,7 +28,12 @@ export default function MonthView({ currentDate }: { currentDate: Date }) {
                     <div key={dayIndex} className={`min-h-[120px] p-2 border-b border-r border-gray-200 last:border-r-0
                         ${isCurrentMonth(day)
                             ? 'bg-white' 
-                            : 'bg-gray-100'}`}>
+                            : 'bg-gray-50'}
+                        ${isPastDate(day)
+                            ? 'cursor-not-allowed opacity-50' 
+                            : 'cursor-pointer hover:bg-blue-50'}
+                        transition-colors`
+                        }>
                         <div className={`text-sm font-medium mb-1 
                             ${isToday(day) 
                                 ? 'w-7 h-7 rounded-full bg-black text-white flex items-center justify-center' 
